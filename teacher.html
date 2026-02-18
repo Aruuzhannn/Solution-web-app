@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EasyChemLearn — Мұғалім панелі</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:16px; }
+    .container { max-width: 1000px; margin: 0 auto; background:#fff; border-radius:14px; padding:16px; box-shadow:0 10px 22px rgba(0,0,0,.08); }
+    h2 { margin: 0 0 8px; }
+    .muted { color:#666; font-size: 13px; }
+    iframe { width:100%; height:80vh; border:1px solid #e7eaee; border-radius:12px; }
+    input { width:100%; padding:10px; border-radius:10px; border:1px solid #d7dbe1; margin:10px 0; }
+    button { width:100%; padding:11px; border:0; border-radius:10px; background:#4a90e2; color:#fff; font-size:16px; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Мұғалім панелі</h2>
+    <div class="muted">
+      Бұл бет Google Sheets-ті көрсетеді. Ол үшін Sheet-ті “Publish to web” жасау керек.
+    </div>
+
+    <div class="muted" style="margin-top:10px;">
+      1) Google Sheet → File → Share → Publish to web<br/>
+      2) “Entire document” + “Web page” → Publish<br/>
+      3) Ашылған сілтемені төменге қой
+    </div>
+
+    <input id="sheetUrl" placeholder="Publish link (https://docs.google.com/...)"/>
+    <button onclick="loadSheet()">Кестені ашу</button>
+
+    <div style="margin-top:12px;">
+      <iframe id="frame" src=""></iframe>
+    </div>
+  </div>
+
+<script>
+  function loadSheet(){
+    const url = document.getElementById('sheetUrl').value.trim();
+    if(!url) return alert("Publish link-ті қой!");
+    document.getElementById('frame').src = url;
+    localStorage.setItem("teacher_sheet_url", url);
+  }
+  window.onload = function(){
+    const saved = localStorage.getItem("teacher_sheet_url");
+    if(saved){
+      document.getElementById('sheetUrl').value = saved;
+      document.getElementById('frame').src = saved;
+    }
+  }
+</script>
+</body>
+</html>

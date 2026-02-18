@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EasyChemLearn — Концентрациялар</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f4f6f8; margin:0; padding:16px; }
+    .container { max-width: 820px; margin: 0 auto; background:#fff; border-radius:14px; padding:18px; box-shadow:0 10px 22px rgba(0,0,0,.08); }
+    h1 { margin: 0 0 6px; font-size: 22px; }
+    .sub { margin: 0 0 14px; color:#555; }
+    .row { display:flex; gap:12px; flex-wrap:wrap; }
+    .card { background:#fafbfc; border:1px solid #e7eaee; border-radius:12px; padding:12px; }
+    .grow { flex:1; min-width: 260px; }
+    label { display:block; text-align:left; font-size: 13px; color:#444; margin: 8px 0 6px; }
+    input, select { width:100%; padding:10px; border-radius:10px; border:1px solid #d7dbe1; font-size:16px; box-sizing:border-box; }
+    button { width:100%; padding:11px; border:0; border-radius:10px; background:#4a90e2; color:#fff; font-size:16px; cursor:pointer; }
+    button:hover { background:#357abd; }
+    button.secondary { background:#eef2f7; color:#111; }
+    button.secondary:hover { background:#e3e8f0; }
+    .topbar { display:flex; gap:10px; justify-content:space-between; align-items:center; margin-bottom:12px; }
+    .pill { background:#eef6ff; color:#1b4b8a; padding:6px 10px; border-radius:999px; font-size:13px; }
+    .info { display:none; margin-top:10px; padding:10px; border-radius:10px; background:#fff3cd; border:1px solid #ffe69c; text-align:left; }
+    .ok { background:#e7f7ee; border:1px solid #bfe8cf; }
+    .danger { background:#ffecec; border:1px solid #ffb6b6; }
+    .muted { color:#666; font-size: 13px; }
+    .actions { display:flex; gap:10px; }
+    .actions button { flex:1; }
+    .hr { height:1px; background:#e7eaee; margin:12px 0; }
+    a { color:#357abd; text-decoration:none; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="topbar">
+    <div>
+      <h1>EasyChemLearn</h1>
+      <p class="sub">Тақырып: <b>Молярлық және нормалдық концентрация</b></p>
+    </div>
+    <div style="text-align:right">
+      <div class="pill" id="statusPill">Қонақ</div>
+      <div class="muted"><a href="teacher.html" target="_blank">Мұғалім панелі</a></div>
+    </div>
+  </div>
+
+  <!-- LOGIN -->
+  <div id="loginSection" class="card">
+    <label>Студент аты-жөні</label>
+    <input id="studentNameInput" type="text" placeholder="Мысалы: Айдана Төлегенқызы" onkeydown="if(event.key==='Enter') login()" />
+    <div class="actions" style="margin-top:10px;">
+      <button onclick="login()">Кіру</button>
+      <button class="secondary" onclick="clearLocal()">Тазалау</button>
+    </div>
+    <div class="muted" style="margin-top:8px;">
+      Ескерту: прогресс сіздің құрылғыңызда сақталады және Google Sheets-ке жіберіледі.
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="appSection" style="display:none;">
+    <div class="row">
+      <div class="card grow">
+        <div><b id="welcome"></b></div>
+        <div class="hr"></div>
+        <div id="stats" class="muted"></div>
+      </div>
+      <div class="card grow">
+        <div><b>Бағалау ережесі</b></div>
+        <div class="muted" style="margin-top:6px;">
+          • Бірден дұрыс → <b>1 балл</b><br/>
+          • 1 рет қате, кейін дұрыс (подсказкасыз) → <b>0.5 балл</b><br/>
+          • Подсказка қолданса (кемінде 1 рет) → <b>0.3 балл</b> (есепке)
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <div class="card">
+      <div class="pill" id="levelPill">Деңгей: 1</div>
+      <h3 id="question" style="margin:10px 0 8px; text-align:left;"></h3>
+
+      <div class="row">
+        <div class="grow">
+          <label>Жауап (сан)</label>
+          <input id="answerInput" type="number" step="any" placeholder="Мысалы: 2.78" />
+        </div>
+        <div class="grow">
+          <label>Бірлік</label>
+          <select id="unitSelect">
+            <option value="">Бірлік таңда</option>
+            <option value="g">г</option>
+            <option value="N">N</option>
+            <option value="mL">мл</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="actions" style="margin-top:10px;">
+        <button onclick="submitAnswer()">Тексеру</button>
+        <button class="secondary" onclick="showHint()">Подсказка</button>
+      </div>
+
+      <div id="infoBox" class="info"></div>
+
+      <div class="actions" style="margin-top:10px;">
+        <button class="secondary" onclick="logout()">Шығу</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
